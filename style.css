@@ -1,0 +1,172 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+body {
+background: #222;
+}
+.card{
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(135deg,#00feba,#5b548a);
+    color:#ffc;
+    margin: 100px auto 0;
+    border-radius:20px;
+    padding: 40px 35px;
+    text-align:centre;
+}
+.search{
+    width: 100%;
+    display:flex;
+    align-items:centre;
+    justify-content: space-between;
+}
+/* Add this CSS to style the date picker button */
+.search input[type="date"] {
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Style the search button */
+.search button {
+    background-color: #4c93af;
+    color: hsl(0, 0%, 100%);
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Hover effect for the search button */
+.search button:hover {
+    background-color: #45a049;
+}
+
+.weather-icon{
+    width: 170px;
+    margin-top: 30px;
+}
+.weather h1{
+    font-size: 80px;
+    font-weight: 500;
+}
+.weather h2{
+    font-size: 45px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+.details{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 50px;
+}
+.col{
+    display:flex;
+    align-items:center;
+    text-align:left;
+}
+.col img{
+    width: 40px;
+    margin-right: 10px;
+}
+.humidity, .wind{
+    font-size: 28px;
+    margin-top: -6px;
+}
+.weather{
+    display: none;
+}
+.error{
+    text-align: left;
+    margin-left:10px;
+    font-size: 14px;
+    margin-top:10px;
+    display: none;
+}
+/* Style the Wikipedia link container */
+.wikipedia-link {
+    margin-top: 20px; /* Adjust as needed */
+}
+
+/* Style the Wikipedia link */
+.wikipedia-link a {
+    color: #0066cc; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effect for the Wikipedia link */
+.wikipedia-link a:hover {
+    text-decoration: underline;
+}
+/* Style the Google search link container */
+.google-search-link {
+    margin-top: 10px;
+}
+
+/* Style the Google search link */
+.google-search-link a {
+    color: hsl(44, 78%, 52%); /* Google's color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effect for the Google search link */
+.google-search-link a:hover {
+    text-decoration: underline;
+}
+/* Style the Google Maps link container */
+.google-map-link {
+    margin-top: 10px;
+}
+
+/* Style the Google Maps link */
+.google-map-link a {
+    color: #4285f4; /* Google Maps color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effect for the Google Maps link */
+.google-map-link a:hover {
+    text-decoration: underline;
+}
+
+/* Style the icon and link container */
+.wikipedia-link,
+.google-search-link,
+.google-map-link {
+    margin-top: 10px;
+}
+
+/* Style the icon */
+.wikipedia-link img,
+.google-search-link img,
+.google-map-link img {
+    width: 20px; /* Adjust the width as needed */
+    height: 20px; /* Adjust the height as needed */
+    margin-right: 5px; /* Adjust the spacing between the icon and link */
+}
+
+/* Style the links */
+.wikipedia-link a,
+.google-search-link a,
+.google-map-link a {
+    color: #0066cc; /* Wikipedia link color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effect for the links */
+.wikipedia-link a:hover,
+.google-search-link a:hover,
+.google-map-link a:hover {
+    text-decoration: underline;
+}

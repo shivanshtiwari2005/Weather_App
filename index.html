@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="enter city name" spellcheck="false">
+            <input type="date" id="datepicker">
+            <button><img src="search.png"></button>
+        </div>
+        
+        <div class="error">
+            <p>Invalid city name</p>
+        </div>
+        
+    </style>
+</head>
+<body>
+
+<!-- Wikipedia Link with Icon -->
+<div class="wikipedia-link">
+    <a href="https://en.wikipedia.org/wiki/Your_Wikipedia_Link" target="_blank">
+        <img src="wikipedia.png" alt="Wikipedia Icon"> Wikipedia
+    </a>
+</div>
+
+<!-- Tourist Destination Link with Icon -->
+<div class="google-search-link">
+    <a href="https://your_tourist_destination_link" target="_blank">
+        <img src="tourist.png" alt="Tourist Icon"> Tourist Destination
+    </a>
+</div>
+
+<!-- Map Link with Icon -->
+<div class="google-map-link">
+    <a href="https://your_map_link" target="_blank">
+        <img src="map.png" alt="Map Icon"> Map
+    </a>
+</div>
+
+        <div class="weather">
+            <img src="rain.png" class="weather-icon">
+            <h1 class="temp">22°C</h1>
+            <h2 class="city">New York</h2>
+            <div class="details">
+                <div class="col">
+                    <img src="humidity.png">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="wind.png">
+                    <div>
+                        <p class="wind">15 Km/h</p>
+                        <p>Wind speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+   const apiKey = "2658e236e5c24e6c9f7e37cd85698482";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+const searchBox = document.querySelector(".search input");
+const datePicker = document.getElementById("datepicker");
+const searchBtn = document.querySelector(".search button");
+const weatherIcon = document.querySelector(".weather");
+const wikipediaLinkContainer = document.querySelector(".wikipedia-link");
+const googleSearchLinkContainer = document.querySelector(".google-search-link");
+const googleMapLinkContainer = document.querySelector(".google-map-link");
+
+async function checkWeather(city, date) {
+    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+    if (response.status == 404) {
+        document.querySelector(".error").style.display = "block";
+        weatherIcon.style.display = "none";
+        wikipediaLinkContainer.innerHTML = "";
+        googleSearchLinkContainer.innerHTML = "";
+        googleMapLinkContainer.innerHTML = ""; // Clear Google map link on error
+    } else {
+        var data = await response.json();
+
+        document.querySelector(".city").innerHTML = data.name;
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + " Km/h";
+        if (data.weather[0].main == "Clouds") {
+            weatherIcon.src = "clouds.png";
+        } else if (data.weather[0].main == "Clear") {
+            weatherIcon.src = "clear.png";
+        } else if (data.weather[0].main == "Rain") {
+            weatherIcon.src = "rain.png";
+        } else if (data.weather[0].main == "Drizzle") {
+            weatherIcon.src = "drizzle.png";
+        } else if (data.weather[0].main == "Mist") {
+            weatherIcon.src = "mist.png";
+        }
+        weatherIcon.style.display = "block";
+        document.querySelector(".error").style.display = "none";
+
+        // Add Wikipedia link
+        addWikipediaLink(data.name);
+
+        // Add Google search link
+        addGoogleSearchLink(data.name);
+
+        // Add Google Maps link
+        addGoogleMapLink(data.name, data.coord.lat, data.coord.lon);
+    }
+}
+
+function addWikipediaLink(cityName) {
+    const wikipediaUrl = `https://en.wikipedia.org/wiki/${cityName}`;
+    wikipediaLinkContainer.innerHTML = `<a href="${wikipediaUrl}" target="_blank">Learn more about ${cityName} on Wikipedia</a>`;
+}
+
+function addGoogleSearchLink(cityName) {
+    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(cityName)}+tourist+destination`;
+    googleSearchLinkContainer.innerHTML = `<a href="${googleSearchUrl}" target="_blank">Search for ${cityName} as a tourist destination on Google</a>`;
+}
+
+function addGoogleMapLink(cityName, lat, lon) {
+    const googleMapUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+    googleMapLinkContainer.innerHTML = `<a href="${googleMapUrl}" target="_blank">View ${cityName} on Google Maps <img src="map.png" alt="Map Icon"></a>`;
+}
+
+searchBtn.addEventListener("click", () => {
+    checkWeather(searchBox.value, datePicker.value);
+});
+
+// Handle Enter key press
+searchBox.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+        checkWeather(searchBox.value, datePicker.value);
+    }
+});
+
+  
+  
+
+    </script>
+</body>
+</html>
